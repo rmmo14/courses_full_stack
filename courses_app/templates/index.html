@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course</title>
+</head>
+
+<body>
+    <h3>Add a new course</h3>
+    <form action="/add" method="POST">
+        {% csrf_token %}
+        <p>Name</p>
+        <input type="text" name="name" id="course_info">
+        <p>Description</p>
+        <input type="text" name="description" id="course_info">
+        <button>Add</button>
+    </form>
+    <h3>Courses</h3>
+    <table>
+        <thead>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for courses in allCourses %}
+            <tr>
+                <td>{{courses.name}}</td>
+                <td>{{courses.description}}</td>
+                <td>{{courses.created_at}}</td>
+                <td>
+                    <a href="/courses/destroy/{{courses.id}}">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
